@@ -39,7 +39,6 @@ nbproject
 .env
 node_modules
 postgres_data
-post
-profile
+
 
 # Generated files
