@@ -118,7 +118,7 @@ describe('index', () => {
       const tweet = {
         tweettxt: 'hello.. ',
         user_id: '1',
-        post_image: '9c37ee2f60a1350aba2974cb1b997a2e'
+        post_image: '9c37ee2f60a1350aba2974cb1b997a2e',
       };
       request(server)
         .post('/tweet')
@@ -198,7 +198,7 @@ describe('index', () => {
           } else {
             res.status.should.be.equal(302);
             done();
-          };
+          }
         });
     });
   });
