@@ -198,7 +198,7 @@ describe('index', () => {
           } else {
             res.status.should.be.equal(302);
             done();
-          }
+          };
         });
     });
   });
