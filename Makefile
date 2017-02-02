@@ -15,3 +15,4 @@ lint:
 
 test:
 	PGDB_DB=test-twitter mocha
+
