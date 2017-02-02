@@ -1,4 +1,128 @@
 extends ./layouts/main.pug
 
 block content
-  h1= title
+  .site-wrapper
+      .site-wrapper-inner
+        .cover-container
+          .masthead.clearfix
+            .inner
+              h1.masthead-brand Twitter
+
+
+
+          .inner.cover
+            h1.cover-heading Hola !!
+            p.lead
+              | Create you network here, make friends follow them, make tweets and many more.
+              br
+              | Hurry up !! Friends are waiting for you
+
+
+            button.btn.btn-primary(data-toggle='modal', data-target='#myModal')
+              | Log in
+            #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                    h4#myModalLabel.modal-title Log in
+
+                  .modal-body
+                    form(id='login_user', role='form', action='/login', method='post')
+
+                      .form-group
+                        .input-group
+                          input#uLogin.form-control(type='text', placeholder='email', name='email', required='')
+                          label.input-group-addon.glyphicon.glyphicon-user(for='uLogin')
+                        -if(errors)
+                          each error in errors
+                            -if(error.param == 'email')
+                              p= error.msg
+
+
+                      .form-group
+                        .input-group
+                          input#uPassword.form-control(type='password', placeholder='Password', name='password', required='')
+                          label.input-group-addon.glyphicon.glyphicon-envelope(for='uPassword')
+                        -if(errors)
+                          each error in errors
+                            -if(error.param == 'password')
+                              p= error.msg
+                        | &nbsp &nbsp
+
+                        div
+                          input.form-control.btn.btn-primary(type='submit', value='Log in')
+
+                //- here I am trying to use butoon in footer which turs as a progress bar when click action is apply and sign up js is for this progress bar
+                  //- .modal-footer
+                  //-   button.form-control.btn.btn-primary Ok
+                  //-   .progress
+                  //-     .progress-bar.progress-bar-primary(role='progressbar', aria-valuenow='1', aria-valuemin='1', aria-valuemax='100', style='width: 0%;')
+                  //-       span.sr-only progress
+
+            | &nbsp &nbsp
+            button.btn.btn-primary(data-toggle='modal', data-target='#myModal1')
+              | Register
+            #myModal1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                    h4#myModalLabel.modal-title Register
+
+                  .modal-body
+                    form(id='register_data', enctype= "multipart/form-data", role='form', action='/register', method='post')
+
+                      .form-group
+                        p.w3-center
+                          img.w3-circle(src='images/images.png', style='height:106px;width:106px', alt='Avatar')
+                          h6 Upload a Profile picture..
+                          input.form-control(type='file', name='file')
+
+                      .form-group
+                        .input-group
+                          input#uLogin.form-control(type='text', placeholder='username', name='username', required='')
+                          label.input-group-addon.glyphicon.glyphicon-user(for='uLogin')
+                        -if(errors)
+                          each error in errors
+                            -if(error.param == 'username')
+                              p= error.msg
+
+                      .form-group
+                        .input-group
+                          input#uPassword.form-control(type='password', placeholder='Password', name='password', required='')
+                          label.input-group-addon.glyphicon.glyphicon-lock(for='uPassword')
+                        -if(errors)
+                          each error in errors
+                            -if(error.param == 'password')
+                              p= error.msg
+
+                      .form-group
+                        .input-group
+                          input#uEmail.form-control(type='text', placeholder='Email address', name='email', required='')
+                          label.input-group-addon.glyphicon.glyphicon-envelope(for='uEmail')
+                        -if(errors)
+                          each error in errors
+                            -if(error.param == 'email')
+                              p= error.msg
+
+                        | &nbsp &nbsp
+
+                        div
+                          input.form-control.btn.btn-primary(type='submit', value='Sign up')
+
+                //- here I am trying to use butoon in footer which turs as a progress bar when click action is apply and sign up js is for this progress bar
+                  //- .modal-footer
+                  //-   button.form-control.btn.btn-primary Sign up
+                  //-   .progress
+                  //-     .progress-bar.progress-bar-primary(role='progressbar', aria-valuenow='1', aria-valuemin='1', aria-valuemax='100', style='width: 0%;')
+                  //-       span.sr-only progress
+
+          .mastfoot
+            .inner
+              p
+                | copyrights
+                | , by
+                a(href='#') @jatin
+                | .
+

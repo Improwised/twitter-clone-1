@@ -1,0 +1,142 @@
+extends ./layouts/main.pug
+
+block content
+  div
+    nav.navbar-collapse.collapse.navbar-default
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='/') Twitter
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.bg
+            li.active
+              a.span.glyphicon.glyphicon-home(href="/home")
+                span.sr-only (current)
+            li
+              a.span.glyphicon.glyphicon-globe(href="/")
+            li
+              a.span.glyphicon.glyphicon-envelope(href="/")
+
+          a.span.glyphicon.glyphicon-log-out.logout(href="/logout", data-toggle="tooltip", data-placement="bottom", title="logout")
+
+          .chip
+            span
+            a(href="/profile", data-toggle="tooltip", data-placement="bottom", title="Profile")
+              img(src='images/images.png', alt='Person', width='96', height='96')
+              |   Profile
+
+
+          span.tweet(data-toggle="tooltip", data-placement="bottom", title="tweet")
+            img(src='images/nax0lu20160319141628.png', alt='tweet', width='35', height='30', data-toggle='modal', data-target='#myModal')
+            #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                    h4#myModalLabel.modal-title Tweet
+                  .modal-body
+                    form(id='tweet', method='post', action='/tweet' enctype='multipart/form-data')
+                      .form-group
+                        .input-group
+                          label(for='text') what's on your mind ?
+                        textarea#text.form-control(rows='5', name='tweettxt', maxlength='140')
+                      button.btn.btn-primary.form-control(type='submit') tweet
+                      br
+                      input.form-control(type='file', name='file')
+
+
+  .w3-container.w3-content(style='max-width:1400px;margin-top:80px')
+    // The Grid
+    .w3-row
+      .w3-col.m10
+        .w3-row-padding
+          .w3-col.m12
+            .w3-container.w3-round.w3-theme-l7.w3-border.w3-theme-border.w3-margin-bottom.w3-hide-small
+                span.w3-hover-text-grey.w3-closebtn(onclick="this.parentElement.style.display='none'")
+                  i.fa.fa-remove
+                p
+                  strong AMAZING !!
+                p
+                  | share beautiful moments of life with your friends
+                  br
+                  | make your firts post today.
+            br
+
+        div
+          each txt in tweets
+            .w3-container.w3-card-2.w3-white.w3-round.w3-margin
+              br
+              img.w3-left.w3-circle.w3-margin-right(src='images/profile/'+txt.image, alt='Avatar', style='width:60px')
+              span.time= txt.created_at
+              br
+              h4.w3-left-align
+                span= txt.username
+              br
+              .form-group
+              - if(txt.post_image){
+                img.w3-left.w3-round.w3-margin-center.w3-margin-bottom(src='images/post/'+txt.post_image, alt='Avatar', style='width: 100%; height: 100%')
+              - }
+              br
+              br
+              div
+                h4
+                  span= txt.tweettxt
+              br
+              .w3-row-padding(style='margin:0 -16px')
+              button.w3-btn.w3-theme-d1.w3-margin-bottom(type='button')
+                i.fa.fa-thumbs-up
+                |   Like
+              | &nbsp
+              button.w3-btn.w3-theme-d2.w3-margin-bottom(type='button')
+                i.fa.fa-comment
+                |   Comment
+              br
+              br
+
+
+
+      // Right Column
+      .w3-col.m2
+        .w3-card-2.w3-round.w3-white.w3-center
+          .w3-container
+            br
+            p Trends:
+            img(src='images/New-Trends-Blauw.png', alt='thrends', style='width:100%;')
+            br
+            p
+              strong whats new today ?
+            p
+              button.w3-btn.w3-btn-block.w3-theme-l4 Info
+            br
+        br
+        div
+          each name in follows
+            .w3-card-2.w3-round.w3-white.w3-center
+              .w3-container
+                br
+                p Follow More
+                img(src='images/profile/'+name.image, alt='followers', style='width:50%')
+                br
+                br
+                span= name.username
+                .w3-row.w3-opacity
+                  form(method='post', action='/follow')
+                    input(type = 'hidden', name='myfollow',  value= name.id)
+                    button.w3-btn.w3-green.w3-btn-block.w3-section(title='Accept' type='submit')
+                      i.fa.fa-check
+
+                  //- form(method='post', action='/unfollow')
+                  //-   .w3-half
+                  //-     input(type = 'hidden', name='myunfollow', value= name.id)
+                  //-     button.w3-btn.w3-red.w3-btn-block.w3-section(title='Decline' type='submit')
+                  //-       i.fa.fa-remove
+            br
+
+        br
+        .w3-card-2.w3-round.w3-white.w3-padding-16.w3-center
+          p ADS
+        br
+        .w3-card-2.w3-round.w3-white.w3-padding-32.w3-center
+          p ADS
+
+
+

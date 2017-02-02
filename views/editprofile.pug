@@ -1,0 +1,84 @@
+extends ./layouts/main.pug
+
+block content
+  div
+    nav.navbar-collapse.collapse.navbar-default
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='/') Twitter
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.bg
+            li
+              a.span.glyphicon.glyphicon-home(href="/home")
+            li
+              a.span.glyphicon.glyphicon-globe(href="/")
+            li
+              a.span.glyphicon.glyphicon-envelope(href="/")
+
+          a.span.glyphicon.glyphicon-log-out.logout(href="/logout", data-toggle="tooltip", data-placement="bottom", title="logout")
+
+
+          .chip
+            span.active
+            a(href="/profile", data-toggle="tooltip", data-placement="bottom", title="Profile")
+              span.sr-only (current)
+              img(src='images/images.png', alt='Person', width='96', height='96')
+              |   Profile
+
+
+          span.tweet(data-toggle="tooltip", data-placement="bottom", title="tweet")
+            img(src='images/nax0lu20160319141628.png', alt='tweet', width='35', height='30', data-toggle='modal', data-target='#myModal')
+          #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                  h4#myModalLabel.modal-title Tweet
+                .modal-body
+                  form(id='tweet', method='post', action='/home')
+                    .form-group
+                      .input-group
+                        label(for='text') Wright something..
+                        textarea#text.form-control(rows='5', name='text')
+                    button.btn.btn-primary.form-control(type='submit', href='/home') tweet
+      .container
+        h1 Edit Profile
+        hr
+        .row
+          form.form-horizontal(role='form',enctype= "multipart/form-data", action='/editprofile', method='post')
+            each r in res
+              // left column
+              .col-md-3
+                .text-center
+                  img.avatar.img-circle(src='//placehold.it/100', alt='avatar')
+                  h6 Upload a different photo...
+                  input.form-control(type='file', name='file')
+              // edit form column
+              .col-md-9.personal-info
+                .alert.alert-info.alert-dismissable
+                  a.panel-close.close(data-dismiss='alert') ×
+                  i.fa.fa-coffee
+                  |           This is an
+                  strong .alert
+                  | . Use this to show important messages to the user.
+                h3 Personal info
+                .form-group
+                  label.col-lg-3.control-label Username:
+                  .col-lg-8
+                    input.form-control(type='text', placeholder='username', name='username', value=r.username)
+                .form-group
+                  label.col-lg-3.control-label Email:
+                  .col-lg-8
+                    input.form-control(type='email', placeholder='email', name='email', value=r.email)
+                .form-group
+                  label.col-lg-3.control-label Password:
+                  .col-lg-8
+                    input.form-control(type='password', placeholder='Password', name='password', value=r.password)
+            .form-group
+              label.col-md-3.control-label
+              .col-md-8
+                input.btn.btn-primary(type='submit', value='Save Changes')
+                span
+                input.btn.btn-default(type='reset', value='Cancel')
+      hr
+

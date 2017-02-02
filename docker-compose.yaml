@@ -1,0 +1,12 @@
+version: '2'
+services:
+  db:
+    image: postgres:9-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: parmar
+      POSTGRES_USER: jatin
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+

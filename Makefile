@@ -7,8 +7,11 @@ SHELL := /bin/bash
 JS_SRC = $(shell find . -type f -name '*.js' ! -path './node_modules/*')
 JSON_SRC = $(shell find . -type f -name '*.json' ! -path './node_modules/*')
 
-.PHONY: lint
+.PHONY: lint test
 
 lint:
 	jsonlint -q -c ${JSON_SRC}
 	eslint ${JS_SRC} ${ESLINT_ARGS}
+
+test:
+	PGDB_DB=test-twitter mocha
