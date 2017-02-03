@@ -10,4 +10,4 @@ before_script:
  - psql -c 'create database travis;' -U postgres -w
  - psql -c 'create database test_twitter;' -U postgres -w
 
- - psql -f 'testdatabsetablescript.sql'
+ - psql -f 'testdatabsescript.sql'
