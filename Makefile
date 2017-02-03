@@ -19,6 +19,6 @@ test:
 	PGDB_TCP_HOST=127.0.0.1
 	PGDB_USER=jatin
 	PGDB_PASS=parmar
-	PGDB_DB=jatin
+
 
 
