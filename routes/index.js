@@ -323,6 +323,7 @@ router.get('/editprofile', (req, res) => {
     .field('username')
     .field('password')
     .field('email')
+    .field('image')
     .from('registeruser')
     .where('id = ?', req.session.user_id)
     .toParam();
