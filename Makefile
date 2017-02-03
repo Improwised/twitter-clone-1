@@ -14,5 +14,5 @@ lint:
 	eslint ${JS_SRC} ${ESLINT_ARGS}
 
 test:
-	PGDB_DB=test_twitter mocha
+	PGDB_DB=test_twitter PGDB_PASS= mocha
 
