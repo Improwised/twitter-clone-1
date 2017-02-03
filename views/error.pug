@@ -1,5 +1,74 @@
 extends ./layouts/main.pug
 
 block content
-  h1= message
-  p= error
+  .site-wrapper
+      .site-wrapper-inner
+        .cover-container
+          .masthead.clearfix
+            .inner
+              h1.masthead-brand Twitter
+
+          .w3-container.w3-round.w3-theme-l7.w3-border.w3-theme-border.w3-margin-bottom.w3-hide-small
+                span.w3-hover-text-grey.w3-closebtn(onclick="this.parentElement.style.display='none'")
+                  i.fa.fa-remove
+                p
+                  strong Something went wrong !!!
+                p
+                  | please check your Email id and Password
+
+          br
+
+
+          .inner.cover
+            h1.cover-heading Hola !!
+            p.lead
+              | Create you network here, make friends follow them, make tweets and many more.
+              br
+              | Hurry up !! Friends are waiting for you
+
+
+            button.btn.btn-primary(data-toggle='modal', data-target='#myModal')
+              | Log in
+            #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                    h4#myModalLabel.modal-title Log in
+
+                  .modal-body
+                    form(id='login_user', role='form', action='/login', method='post')
+
+                      .form-group
+                        .input-group
+                          input#uLogin.form-control(type='email', placeholder='email', name='email', required='')
+                          label.input-group-addon.glyphicon.glyphicon-user(for='uLogin')
+                        -if(errors)
+                          each error in errors
+                            -if(error.param == 'email')
+                              p= error.msg
+
+
+                      .form-group
+                        .input-group
+                          input#uPassword.form-control(type='password', placeholder='Password', name='password', required='')
+                          label.input-group-addon.glyphicon.glyphicon-envelope(for='uPassword')
+                        -if(errors)
+                          each error in errors
+                            -if(error.param == 'password')
+                              p= error.msg
+                        | &nbsp &nbsp
+
+                        div
+                          input.form-control.btn.btn-primary(type='submit', value='Log in')
+
+
+
+          .mastfoot
+            .inner
+              p
+                | copyrights
+                | , by
+                a(href='#') @jatin
+                | .
+

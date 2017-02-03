@@ -81,7 +81,6 @@ router.post('/login', (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const session = req.session;
-  // let errors = [];
 
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('email', 'Email is required').notEmpty();
@@ -92,11 +91,6 @@ router.post('/login', (req, res, next) => {
   if (error) {
     console.log('Failed something went !!');
     console.log('error->>>', error);
-    // errors = errors.concat(error);
-    // errors.push()
-    // res.end()
-    // console.log(errors);
-
     res.render('index', {
       errors: error,
     });
@@ -118,6 +112,8 @@ router.post('/login', (req, res, next) => {
         session.user_id = results.rows[0].id;
         session.mail = email;
         res.redirect('/home');
+      } else {
+        res.render('error');
       }
     });
   }
