@@ -35,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: follower; Type: TABLE; Schema: public; Owner: jatin
+-- Name: follower; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE follower (
@@ -45,10 +45,10 @@ CREATE TABLE follower (
 );
 
 
-ALTER TABLE follower OWNER TO jatin;
+ALTER TABLE follower OWNER TO postgres;
 
 --
--- Name: follower_id_seq; Type: SEQUENCE; Schema: public; Owner: jatin
+-- Name: follower_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE follower_id_seq
@@ -59,17 +59,17 @@ CREATE SEQUENCE follower_id_seq
     CACHE 1;
 
 
-ALTER TABLE follower_id_seq OWNER TO jatin;
+ALTER TABLE follower_id_seq OWNER TO postgres;
 
 --
--- Name: follower_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jatin
+-- Name: follower_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE follower_id_seq OWNED BY follower.id;
 
 
 --
--- Name: registeruser; Type: TABLE; Schema: public; Owner: jatin
+-- Name: registeruser; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE registeruser (
@@ -81,10 +81,10 @@ CREATE TABLE registeruser (
 );
 
 
-ALTER TABLE registeruser OWNER TO jatin;
+ALTER TABLE registeruser OWNER TO postgres;
 
 --
--- Name: registeruser_id_seq; Type: SEQUENCE; Schema: public; Owner: jatin
+-- Name: registeruser_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE registeruser_id_seq
@@ -95,17 +95,17 @@ CREATE SEQUENCE registeruser_id_seq
     CACHE 1;
 
 
-ALTER TABLE registeruser_id_seq OWNER TO jatin;
+ALTER TABLE registeruser_id_seq OWNER TO postgres;
 
 --
--- Name: registeruser_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jatin
+-- Name: registeruser_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE registeruser_id_seq OWNED BY registeruser.id;
 
 
 --
--- Name: tweet; Type: TABLE; Schema: public; Owner: jatin
+-- Name: tweet; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE tweet (
@@ -118,10 +118,10 @@ CREATE TABLE tweet (
 );
 
 
-ALTER TABLE tweet OWNER TO jatin;
+ALTER TABLE tweet OWNER TO postgres;
 
 --
--- Name: tweet_id_seq; Type: SEQUENCE; Schema: public; Owner: jatin
+-- Name: tweet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE tweet_id_seq
@@ -132,38 +132,38 @@ CREATE SEQUENCE tweet_id_seq
     CACHE 1;
 
 
-ALTER TABLE tweet_id_seq OWNER TO jatin;
+ALTER TABLE tweet_id_seq OWNER TO postgres;
 
 --
--- Name: tweet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jatin
+-- Name: tweet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE tweet_id_seq OWNED BY tweet.id;
 
 
 --
--- Name: follower id; Type: DEFAULT; Schema: public; Owner: jatin
+-- Name: follower id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY follower ALTER COLUMN id SET DEFAULT nextval('follower_id_seq'::regclass);
 
 
 --
--- Name: registeruser id; Type: DEFAULT; Schema: public; Owner: jatin
+-- Name: registeruser id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY registeruser ALTER COLUMN id SET DEFAULT nextval('registeruser_id_seq'::regclass);
 
 
 --
--- Name: tweet id; Type: DEFAULT; Schema: public; Owner: jatin
+-- Name: tweet id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY tweet ALTER COLUMN id SET DEFAULT nextval('tweet_id_seq'::regclass);
 
 
 --
--- Data for Name: follower; Type: TABLE DATA; Schema: public; Owner: jatin
+-- Data for Name: follower; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY follower (id, login_user, follow) FROM stdin;
@@ -171,7 +171,7 @@ COPY follower (id, login_user, follow) FROM stdin;
 
 
 --
--- Name: follower_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jatin
+-- Name: follower_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('follower_id_seq', 1, false);
