@@ -14,11 +14,11 @@ lint:
 	eslint ${JS_SRC} ${ESLINT_ARGS}
 
 test:
-	PGDB_DB=test_twitter mocha
 	PGDB_TCP_PORT=5432
 	PGDB_TCP_HOST=127.0.0.1
 	PGDB_USER=jatin
 	PGDB_PASS=parmar
+	PGDB_DB=test_twitter mocha
 
 
 
