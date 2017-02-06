@@ -1,10 +1,12 @@
 const http = require('http');
 const path = require('path');
 
-const express = require('express');
 const bodyParser = require('body-parser');
+const express = require('express');
+const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
 
 // Load dotenv config
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -12,8 +14,6 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   require('dotenv').load();
 
   if (!process.env.PORT) {
-    console.error('Required environment variable not found. Are you sure you have a ".env" file in your application root?');
-    console.error('If not, you can just copy "example.env" and change the defaults as per your need.');
     process.exit(1);
   }
 }
@@ -28,9 +28,15 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(expressValidator());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: '2c44-4D44-WppQ38S',
+  resave: true,
+  saveUninitialized: true,
+}));
 
 app.use('/', routes);
 

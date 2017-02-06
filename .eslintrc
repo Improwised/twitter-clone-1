@@ -10,7 +10,10 @@ extends:
 globals:
   log: true
 
+
+
 rules:
+  no-unused-vars: [1, { "varsIgnorePattern": "^should$" }]
   vars-on-top: 0
 
   # Warnings
