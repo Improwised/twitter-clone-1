@@ -1,11 +1,12 @@
 const should = require('should');
-const request = require('supertest');
-const server = require('../app');
+let request = require('supertest');
+// const server = require('../app');
+request = request('http://localhost:3000');
 
 describe('index', () => {
   describe('GET /', () => {
     it('should return a cover page', (done) => {
-      request(server)
+      request
         .get('/')
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(200)
@@ -18,7 +19,7 @@ describe('index', () => {
 
   describe('GET /home', () => {
     it('should return home page', (done) => {
-      request(server)
+      request
       .get('/home')
       .expect('Content-type', 'text/html; charset=utf-8')
       .expect(200)
@@ -35,7 +36,7 @@ describe('index', () => {
 
   describe('GET /profile', () => {
     it(' should return profile page', (done) => {
-      request(server)
+      request
       .get('/profile')
       .expect('Content-type', 'text/html; charset=utf-8')
       .expect(200)
@@ -53,7 +54,7 @@ describe('index', () => {
   describe('profile', () => {
     describe('GET /editprofile', () => {
       it('should return a edit profile page', (done) => {
-        request(server)
+        request
           .get('/editprofile')
           .expect('Content-type', 'text/html; charset=utf-8')
           .expect(200)
@@ -74,7 +75,7 @@ describe('index', () => {
         email: 'jatin@gmail.com',
         image: '2567901bf9cbf2c5ede7317aba2379bc',
       };
-      request(server)
+      request
         .post('/register')
         .send(registeruser)
         .expect(200)
@@ -97,7 +98,7 @@ describe('index', () => {
         password: 'jatin',
         email: 'jatin@gmail.com',
       };
-      request(server)
+      request
         .post('/login')
         .send(registeruser)
         .expect(302)
@@ -120,7 +121,7 @@ describe('index', () => {
         user_id: '1',
         post_image: '9c37ee2f60a1350aba2974cb1b997a2e',
       };
-      request(server)
+      request
         .post('/tweet')
         .send(tweet)
         .expect(302)
@@ -144,7 +145,7 @@ describe('index', () => {
         email: 'sagar@gmail.com',
         image: '2567901bf9cbf2c5ede7317aba2379bc',
       };
-      request(server)
+      request
         .post('/editprofile')
         .send(editprofile)
         .expect(302)
@@ -166,7 +167,7 @@ describe('index', () => {
         login_user: '1',
         follow: '2',
       };
-      request(server)
+      request
         .post('/follow')
         .send(follow)
         .expect(302)
@@ -187,7 +188,7 @@ describe('index', () => {
       const follow = {
         id: '2',
       };
-      request(server)
+      request
         .post('/unfollow')
         .send(follow)
         .expect(302)
@@ -205,7 +206,7 @@ describe('index', () => {
 
   describe('GET /logout', () => {
     it('should return a main index page', (done) => {
-      request(server)
+      request
         .get('/logout')
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(302)
