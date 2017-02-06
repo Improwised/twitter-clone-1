@@ -14,11 +14,12 @@ lint:
 	eslint ${JS_SRC} ${ESLINT_ARGS}
 
 test:
-	PGDB_TCP_PORT=5432
-	PGDB_TCP_HOST=127.0.0.1
-	PGDB_USER=postgres
-	PGDB_DB=jatin
-	PGDB_DB=test_twitter mocha
+	export PGDB_TCP_PORT=5432
+	export PGDB_TCP_HOST=127.0.0.1
+	export PGDB_USER=postgres
+	export PGDB_DB=jatin
+	export PGDB_DB=test_twitter
+	mocha
 
 
 
