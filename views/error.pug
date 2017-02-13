@@ -1,23 +1,44 @@
 extends ./layouts/main.pug
 
 block content
-  .site-wrapper
+  .site-wrapper.coverimg
       .site-wrapper-inner
         .cover-container
           .masthead.clearfix
             .inner
               h1.masthead-brand Twitter
+              #myNavbar.collapse.navbar-collapse
+                ul.nav.navbar-nav.navbar-right
+                  #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    form#signin.navbar-form.navbar-right(role='form', action='/login', method='post')
+                      .input-group
+                        span
+                          input#email.form-control(type='email', placeholder='email', name='email', required='')
+                        -if(errors)
+                          each error in errors
+                            -if(error.param == 'email')
+                              p= error.msg
+
+                      | &nbsp &nbsp
+                      .input-group
+                        span
+                          input#password.form-control(type='password', placeholder='Password', name='password', required='')
+                        -if(errors)
+                          each error in errors
+                            -if(error.param == 'password')
+                              p= error.msg
+
+                      | &nbsp &nbsp
+                      input.form-control.btn.btn-primary(type='submit', value='Log in')
 
           .w3-container.w3-round.w3-theme-l7.w3-border.w3-theme-border.w3-margin-bottom.w3-hide-small
                 span.w3-hover-text-grey.w3-closebtn(onclick="this.parentElement.style.display='none'")
                   i.fa.fa-remove
                 p
-                  strong Something went wrong !!!
+                  strong Oops ! something went wrong.
                 p
-                  | please check your Email id and Password
-
+                  | Your Email id and Password doen't match try again.
           br
-
 
           .inner.cover
             h1.cover-heading Hola !!
@@ -25,44 +46,6 @@ block content
               | Create you network here, make friends follow them, make tweets and many more.
               br
               | Hurry up !! Friends are waiting for you
-
-
-            button.btn.btn-primary(data-toggle='modal', data-target='#myModal')
-              | Log in
-            #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-              .modal-dialog
-                .modal-content
-                  .modal-header
-                    button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-                    h4#myModalLabel.modal-title Log in
-
-                  .modal-body
-                    form(id='login_user', role='form', action='/login', method='post')
-
-                      .form-group
-                        .input-group
-                          input#uLogin.form-control(type='email', placeholder='email', name='email', required='')
-                          label.input-group-addon.glyphicon.glyphicon-user(for='uLogin')
-                        -if(errors)
-                          each error in errors
-                            -if(error.param == 'email')
-                              p= error.msg
-
-
-                      .form-group
-                        .input-group
-                          input#uPassword.form-control(type='password', placeholder='Password', name='password', required='')
-                          label.input-group-addon.glyphicon.glyphicon-envelope(for='uPassword')
-                        -if(errors)
-                          each error in errors
-                            -if(error.param == 'password')
-                              p= error.msg
-                        | &nbsp &nbsp
-
-                        div
-                          input.form-control.btn.btn-primary(type='submit', value='Log in')
-
-
 
           .mastfoot
             .inner

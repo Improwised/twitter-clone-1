@@ -19,4 +19,4 @@ test: lint
 	export PGDB_USER=postgres
 	export PGDB_DB=jatin
 	export PGDB_DB=test_twitter
-	mocha
+

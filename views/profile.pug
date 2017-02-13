@@ -2,43 +2,41 @@ extends ./layouts/main.pug
 
 block content
   div
-    nav.navbar-collapse.collapse.navbar-default
+    nav.navbar(style="background-color: #4d51ab;")
       .container-fluid
         .navbar-header
-          a.navbar-brand(href='/') Twitter
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav.bg
-            li
+          a.navbar-brand(href='#')
+            img(src='images/twitter.png', width='30', height='25', alt='')
+        #bs-example-navbar-collapse.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
               a.span.glyphicon.glyphicon-home(href="/home")
+                span.sr-only (current)
             li
-              a.span.glyphicon.glyphicon-globe(href="/")
+              a.span.glyphicon.glyphicon-globe(href="#")
             li
-              a.span.glyphicon.glyphicon-envelope(href="/")
-
-          a.span.glyphicon.glyphicon-log-out.logout(href="/logout", data-toggle="tooltip", data-placement="bottom", title="logout")
-
+              a.span.glyphicon.glyphicon-envelope(href="#")
+            li
+              a.span.glyphicon.glyphicon-log-out.logout(href="/logout", data-toggle="tooltip", data-placement="bottom", title="logout")
 
           .chip
-            span.active
+            span
             a(href="/profile", data-toggle="tooltip", data-placement="bottom", title="Profile")
-              span.sr-only (current)
-              img(src='images/images.png', alt='Person', width='96', height='96')
-              |   Profile
-
+              img(src='images/human-greeting.png', alt='Person', width='96', height='96')
 
           span.tweet(data-toggle="tooltip", data-placement="bottom", title="tweet")
-            img(src='images/nax0lu20160319141628.png', alt='tweet', width='35', height='30', data-toggle='modal', data-target='#myModal')
+            img(src='images/feather.png', alt='tweet', width='25', height='25', data-toggle='modal', data-target='#myModal')
             #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
               .modal-dialog
                 .modal-content
                   .modal-header
                     button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-                    h4#myModalLabel.modal-title Tweet
+                    h4#myModalLabel.modal-title(style='color: #4d51ab') Tweet
                   .modal-body
                     form(id='tweet', method='post', action='/tweet' enctype='multipart/form-data')
                       .form-group
                         .input-group
-                          label(for='text') what's on your mind ?
+                          label(for='text', style='color: #4d51ab') what's on your mind ?
                         textarea#text.form-control(rows='5', name='tweettxt', maxlength='140')
                       button.btn.btn-primary.form-control(type='submit') tweet
                       br
@@ -57,11 +55,17 @@ block content
                 h4.w3-center
                   span= user.username
 
-                a(href="/editprofile")  Edit
+                a(href="/editprofile", style='color: #4d51ab')  Edit
                 br
                 br
                 p.w3-center
-                  img.w3-circle(src='images/profile/'+user.image, style='height:106px;width:106px', alt='Avatar')
+                   - if(user.image){
+                      img.w3-circle(src='images/profile/'+user.image, alt='Avatar', style='height:106px;width:106px')
+                   - }
+                   - else{
+                      img.w3-circle(src='images/images.png'+user.image, style='height:106px;width:106px', alt='Avatar')
+                   - }
+
                 br
 
         br
@@ -104,9 +108,10 @@ block content
         .w3-container.w3-round.w3-theme-l7.w3-border.w3-theme-border.w3-margin-bottom.w3-hide-small
           span.w3-hover-text-grey.w3-closebtn(onclick="this.parentElement.style.display='none'")
             i.fa.fa-remove
-          p
+          p(style='color: #4d51ab')
             strong Hey!
-          p Looking for more friends ?
+          p(style='color: #4d51ab')
+            | looking for more friends ?
         // End Left Column
 
       // Middle Column
@@ -116,9 +121,9 @@ block content
             .w3-container.w3-round.w3-theme-l7.w3-border.w3-theme-border.w3-margin-bottom.w3-hide-small
                 span.w3-hover-text-grey.w3-closebtn(onclick="this.parentElement.style.display='none'")
                   i.fa.fa-remove
-                p
+                p(style='color: #4d51ab')
                   strong Hey hola !!
-                p
+                p(style='color: #4d51ab')
                   | Post something people are waith for you !! share your memories with other ..
                   br
                   | lets celebeate today ..
@@ -153,9 +158,10 @@ block content
 
       // Right Column
       .w3-col.m2
+        p(style='color: #4d51ab')
+          strong Trends
         .w3-card-2.w3-round.w3-white.w3-center
           .w3-container
-            p Trends:
             img(src='images/New-Trends-Blauw.png', alt='thrends', style='width:100%;')
             br
             p
@@ -164,10 +170,11 @@ block content
               button.w3-btn.w3-btn-block.w3-theme-l4 Info
         br
         div
+          p(style='color: #4d51ab')
+            strong Following
           each uname in follow
             .w3-card-2.w3-round.w3-white.w3-center
               .w3-container
-                p Following
                 img(src='images/profile/'+uname.image, alt='followers', style='width:50%')
                 br
                 br

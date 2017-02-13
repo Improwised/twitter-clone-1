@@ -7,6 +7,7 @@ describe('index', () => {
   describe('GET /', () => {
     it('should return a cover page', (done) => {
       request
+
         .get('/')
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(200)
@@ -20,6 +21,7 @@ describe('index', () => {
   describe('GET /home', () => {
     it('should return home page', (done) => {
       request
+
       .get('/home')
       .expect('Content-type', 'text/html; charset=utf-8')
       .expect(200)
@@ -37,7 +39,26 @@ describe('index', () => {
   describe('GET /profile', () => {
     it(' should return profile page', (done) => {
       request
+
       .get('/profile')
+      .expect('Content-type', 'text/html; charset=utf-8')
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          done(err);
+        } else {
+          res.status.should.be.equal(200);
+          done();
+        }
+      });
+    });
+  });
+
+  describe('GET /followmore', () => {
+    it(' should return followmore page', (done) => {
+      request
+
+      .get('/followmore')
       .expect('Content-type', 'text/html; charset=utf-8')
       .expect(200)
       .end((err, res) => {
@@ -55,6 +76,7 @@ describe('index', () => {
     describe('GET /editprofile', () => {
       it('should return a edit profile page', (done) => {
         request
+
           .get('/editprofile')
           .expect('Content-type', 'text/html; charset=utf-8')
           .expect(200)
@@ -76,6 +98,7 @@ describe('index', () => {
         image: '2567901bf9cbf2c5ede7317aba2379bc',
       };
       request
+
         .post('/register')
         .send(registeruser)
         .expect(200)
@@ -99,6 +122,7 @@ describe('index', () => {
         email: 'jatin@gmail.com',
       };
       request
+
         .post('/login')
         .send(registeruser)
         .expect(302)
@@ -122,6 +146,7 @@ describe('index', () => {
         post_image: '9c37ee2f60a1350aba2974cb1b997a2e',
       };
       request
+
         .post('/tweet')
         .send(tweet)
         .expect(302)
@@ -146,6 +171,7 @@ describe('index', () => {
         image: '2567901bf9cbf2c5ede7317aba2379bc',
       };
       request
+
         .post('/editprofile')
         .send(editprofile)
         .expect(302)
@@ -168,6 +194,30 @@ describe('index', () => {
         follow: '2',
       };
       request
+
+        .post('/follow')
+        .send(follow)
+        .expect(302)
+        .expect({})
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          } else {
+            res.status.should.be.equal(302);
+            done();
+          }
+        });
+    });
+  });
+
+  describe('POST /followmore', () => {
+    it('user can follow other user form other page', (done) => {
+      const follow = {
+        login_user: '1',
+        follow: '2',
+      };
+      request
+
         .post('/follow')
         .send(follow)
         .expect(302)
@@ -189,6 +239,7 @@ describe('index', () => {
         id: '2',
       };
       request
+
         .post('/unfollow')
         .send(follow)
         .expect(302)
@@ -207,6 +258,7 @@ describe('index', () => {
   describe('GET /logout', () => {
     it('should return a main index page', (done) => {
       request
+
         .get('/logout')
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(302)
