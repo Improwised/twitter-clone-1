@@ -78,6 +78,7 @@ make test
 * **Needs Input**: Whenever there is a domain-related question, or an issue needs clarification, this label is used to mark it as such. This label should be removed by whoever assigned it once enough information is available.
 
 
+
 Placeholder for actual content
 # Twitter-clone-1
 
@@ -154,4 +155,7 @@ make test
 * **PRI - Normal**: These are picked up if all High issues are taken.
 * **PRI - Low**: These are "nice-to-have" features. Only pick these up if there are no pending Critical, High or Normal priority issues.
 * **Needs Review**: Instead of closing tickets one finishes, mark it with "Needs Review", so any other team member can do a quick code review and verify it before we close the ticket.
+
+* **Needs Input**: Whenever there is a domain-related question, or an issue needs clarification, this label is used to mark it as such. This label should be removed by whoever assigned it once enough information is available.
+
 * **Needs Input**: Whenever there is a domain-related question, or an issue needs clarification, this label is used to mark it as such. This label should be removed by whoever assigned it once enough information is available.
