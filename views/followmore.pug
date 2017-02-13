@@ -41,45 +41,58 @@ block content
                       button.btn.btn-primary.form-control(type='submit') tweet
                       br
                       input.form-control(type='file', name='file')
-    .container
-      h1 Edit Profile
-      hr
-      .row
-        form.form-horizontal(role='form',enctype= "multipart/form-data", action='/editprofile', method='post')
-          each r in res
-            // left column
-            .col-md-3
-              .text-center
-                img.avatar.img-circle(src='images/profile/'+r.image, alt='avatar', style='width:100%')
-                h6 Upload a different photo...
-                input.form-control(type='file', name='file')
-            // edit form column
-            .col-md-9.personal-info
-              .alert.alert-info.alert-dismissable
-                a.panel-close.close(data-dismiss='alert') ×
-                i.fa.fa-coffee
-                |           This is an
-                strong .alert
-                | . You change your personal info.
-              h3 Personal info
-              .form-group
-                label.col-lg-3.control-label Username:
-                .col-lg-8
-                  input.form-control(type='text', placeholder='username', name='username', value=r.username)
-              .form-group
-                label.col-lg-3.control-label Email:
-                .col-lg-8
-                  input.form-control(type='email', placeholder='email', name='email', value=r.email)
-              .form-group
-                label.col-lg-3.control-label Password:
-                .col-lg-8
-                  input.form-control(type='password', placeholder='Password', name='password', value=r.password)
-          .form-group
-            label.col-md-3.control-label
-            .col-md-8
-              input.btn.btn-primary(type='submit', value='Save Changes')
-              | &nbsp
-              span
-              input.btn.btn-default(type='reset', value='Cancel')
-    hr
 
+  // Page Container
+  .w3-container.w3-content(style='max-width:1400px;margin-top:80px')
+    // The Grid
+    .w3-row
+      // Left Column
+      .w3-col.m3
+        // Profile
+        .w3-card-2.w3-round.w3-white
+          each user in users
+            .w3-container
+              h4.w3-center
+                span= user.username
+
+              a(href="/editprofile", style='color: #4d51ab')  Edit
+              br
+              br
+              p.w3-center
+                 - if(user.image){
+                    img.w3-circle(src='images/profile/'+user.image, alt='Avatar', style='height:106px;width:106px')
+                 - }
+                 - else{
+                    img.w3-circle(src='images/images.png'+user.image, style='height:106px;width:106px', alt='Avatar')
+                 - }
+
+              br
+
+      .w3-col.m9
+          .w3-row-padding
+            .w3-col.m12
+              .w3-container.w3-round.w3-theme-l7.w3-border.w3-theme-border.w3-margin-bottom.w3-hide-small
+                  span.w3-hover-text-grey.w3-closebtn(onclick="this.parentElement.style.display='none'")
+                    i.fa.fa-remove
+                  p(style='color: #4d51ab')
+                    strong Find More Friends..
+                  p(style='color: #4d51ab')
+                    | lets make more friends extend your network..
+
+    br
+    .w3-row
+      .w3-col.m12
+        each name in follow
+          .w3-col.m3(style='padding: 5px')
+            .w3-card-2.w3-round.w3-white.w3-center
+              .w3-container
+                br
+                img(src='images/profile/'+name.image, alt='followers', style='width:100px; height:100px')
+                br
+                br
+                span= name.username
+                .w3-row.w3-opacity
+                  form(method='post', action='/follow')
+                    input(type = 'hidden', name='myfollow',  value= name.id)
+                    button.w3-btn.w3-green.w3-btn-block.w3-section(title='Accept' type='submit')
+                      i.fa.fa-check

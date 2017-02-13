@@ -154,6 +154,8 @@ router.get('/home', (req, res, next) => {
        .field('follow')
        .from('follower')
        .where('login_user = ?', req.session.user_id))
+       .order('RANDOM()')
+       .limit(1)
        .toParam();
 
 
@@ -220,6 +222,52 @@ router.post('/follow', (req, res, next) => {
     res.redirect('/home');
   });
 });
+
+router.get('/followmore', (req, res, next) => {
+  const session = req.session;
+  let query;
+  if(req.session.mail) {
+  query = DB.builder()
+    .select()
+    .field('username')
+    .field('image')
+    .from('registeruser', 'users')
+    .where('id = ?', req.session.user_id)
+    .toParam();
+
+    DB.executeQuery(query, (error3, users) => {
+      if (error3) {
+        next(error3);
+        return;
+      }
+
+    query = DB.builder()
+    .select()
+    .from('registeruser')
+    .where('id != ?', req.session.user_id)
+    .where('id NOT IN ?',
+     DB.builder()
+       .select()
+       .field('follow')
+       .from('follower')
+       .where('login_user = ?', req.session.user_id))
+       .toParam();
+
+      DB.executeQuery(query, (error4, follow) => {
+        if (error4) {
+          next(error4);
+          return;
+        }
+      res.render('followmore', {
+          users: users.rows,
+          follow: follow.rows,
+        });
+      });
+    });
+  }else {
+    res.render('index');
+  }
+  });
 
 // here user unfolloww other users
 

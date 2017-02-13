@@ -3,11 +3,13 @@
  */
 
 /* Links */
-a,
-a:focus,
-a:hover {
-  color: #265a88;
+a{
+  color: #fff;
 }
+a:hover {
+  color: #4d51ab;
+}
+
 
 /* Custom default button */
 .btn-default,
@@ -25,13 +27,15 @@ html,
 body {
   height: 100%;
   background-color: #fff;
-}
-body {
-  color: #265a88;
+  color: #fff;
   text-align: center;
   text-shadow: 0 0px 0px rgba(0,0,0,.5);
+  background-color: #fff;
 }
 
+.alert {
+  color: #4d51ab ;
+}
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
@@ -71,15 +75,15 @@ body {
 
 .logout {
   float: right;
-  line-height: 50px;
+  line-height: 45px;
 
 }
 
 .chip img {
     float: left;
-    margin: 0 20px 0 -25px;
-    height: 30px;
-    width: 30px;
+    margin: 0 20px 0 -30px;
+    height: 25px;
+    width: 25px;
     border-radius: 30%;
 }
 
@@ -87,9 +91,8 @@ body {
   float: right;
   padding: 10px 25px;
   margin: 0 10px 0 -25px;
-  height: 40px;
-  margin-top: 5px;
-
+  height: 25px;
+  margin-top: 0px;
 }
 
 
@@ -112,7 +115,7 @@ body {
   padding-left: 0;
   font-size: 16px;
   font-weight: bold;
-  color: #265a88; /* IE8 proofing */
+  color: #265a88;
   color: rgba(255,255,255,.75);
   border-bottom: 2px solid transparent;
 }
@@ -137,11 +140,95 @@ body {
     float: right;
   }
 }
+#logbox {
+        padding: 10px;
+        margin: 50px auto;
+        width: 340px;
+        background-color: transparent;
+        -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    }
+#logbox > h1 {
+        text-align: center;
+        font-size: 175%;
+        color: #fff;
+        font-weight: 300;
+    }
 
+#logbox > h1, input {
+        font-family: "Open Sans", Helvetica, sans-serif;
+    }
+
+.input {
+    width: 75%;
+    height: 50px;
+    display: block;
+    margin: 0 auto 15px;
+    padding: 0 15px;
+    border: none;
+    background-color: #4d51ab;
+}
+.input:focus {
+    outline: none;
+    border-bottom-color: #3CC !important;
+}
+.input:hover {
+    border-bottom-color: #dcdcdc;
+}
+.input:invalid {
+    box-shadow: none;
+}
+
+.pass:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 0px white inset;
+}
+
+.inputButton {
+    position: relative;
+    width: 85%;
+    height: 50px;
+    display: block;
+    margin: 30px auto 30px;
+    color: white;
+    background-color: #3CC;
+    border: none;
+    -webkit-box-shadow: 0 5px 0 #2CADAD;
+    -moz-box-shadow: 0 5px 0 #2CADAD;
+    box-shadow: 0 5px 0 #2CADAD;
+}
+.inputButton:hover {
+    top: 2px;
+    -webkit-box-shadow: 0 3px 0 #2CADAD;
+    -moz-box-shadow: 0 3px 0 #2CADAD;
+    box-shadow: 0 3px 0 #2CADAD;
+}
+.inputButton:active {
+    top: 5px;
+    box-shadow: none;
+}
+.inputButton:focus {
+    outline: none;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to bottom,#d58bca 0,#db84ce 100%);
+    border-color: #d58bca;
+}
+.btn-primary:focus,
+.btn-primary:hover {
+    background-color: #e6a8dc;
+    background-position: 0 -50px;
+}
 
 /*
  * Cover
  */
+
+.coverimg {
+  background: url('../images/signup_bg.jpg') no-repeat #5439af;
+  background-size: cover;
+}
 
 .cover {
   padding: 0 20px;
@@ -160,8 +247,8 @@ body {
  */
 
 .mastfoot {
-  color: #265a88; /* IE8 proofing */
-  color: #265a88
+  text-align: center;
+  color: #fff; /* IE8 proofing */
 }
 
 
