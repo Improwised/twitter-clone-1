@@ -226,8 +226,8 @@ router.post('/follow', (req, res, next) => {
 router.get('/followmore', (req, res, next) => {
   const session = req.session;
   let query;
-  if(req.session.mail) {
-  query = DB.builder()
+  if (req.session.mail) {
+    query = DB.builder()
     .select()
     .field('username')
     .field('image')
@@ -241,33 +241,33 @@ router.get('/followmore', (req, res, next) => {
         return;
       }
 
-    query = DB.builder()
-    .select()
-    .from('registeruser')
-    .where('id != ?', req.session.user_id)
-    .where('id NOT IN ?',
-     DB.builder()
-       .select()
-       .field('follow')
-       .from('follower')
-       .where('login_user = ?', req.session.user_id))
-       .toParam();
+      query = DB.builder()
+      .select()
+      .from('registeruser')
+      .where('id != ?', req.session.user_id)
+      .where('id NOT IN ?',
+       DB.builder()
+         .select()
+         .field('follow')
+         .from('follower')
+         .where('login_user = ?', req.session.user_id))
+         .toParam();
 
       DB.executeQuery(query, (error4, follow) => {
         if (error4) {
           next(error4);
           return;
         }
-      res.render('followmore', {
+        res.render('followmore', {
           users: users.rows,
           follow: follow.rows,
         });
       });
     });
-  }else {
+  } else {
     res.render('index');
   }
-  });
+});
 
 // here user unfolloww other users
 
