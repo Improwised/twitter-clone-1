@@ -9,4 +9,18 @@ services:
       POSTGRES_USER: jatin
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+  app:
+    build:
+      context: .
+    environment:
+      PGDB_TCP_PORT: 5432
+      PGDB_TCP_HOST: db
+      PGDB_USER: jatin
+      PGDB_PASS: parmar
+      PGDB_DB: jatin
+      PORT: 3000
+    ports:
+     - "3000:3000"
+    links:
+     - db
 
