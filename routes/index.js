@@ -31,39 +31,39 @@ router.get('/', (req, res, next) => {
 
 // get user registered
 
-var smtpTransport = nodemailer.createTransport({
-   service: "Gmail",  // sets automatically host, port and connection security settings
-   auth: {
-       user: "jatin@improwised.com",
-       pass: "parmar.7744"
-   }
+const smtpTransport = nodemailer.createTransport({
+  service: 'Gmail',  // sets automatically host, port and connection security settings
+  auth: {
+    user: 'jatin@improwised.com',
+    pass: 'parmar.7744',
+  },
 });
- rand=Math.floor((Math.random() * 100) + 54);
+const rand = Math.floor((Math.random() * 100) + 54);
 router.post('/register', upload.single('file'), (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
 
 
-  host=req.get('host');
-  link="http://"+req.get('host')+"/verify?id="+rand;
+  const host = req.get('host');
+  const link = `http://, ${host}, /verify?id=, ${rand}`;
 
-  //send confirmation mail to user ...
-  smtpTransport.sendMail({  //email options
-   from: "improwised Technologies Pvt. Ltd.", // sender address.  Must be the same as authenticated user if using GMail.
-   to: email, // receiver
-   subject: "Confirmation email from improwised technologies private limited", // subject
-   html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" ,
-   // text: "nothing to say..." // body
-}, function(error, response){  //callback
-   if(error){
-       console.log(error);
-   }else{
-       console.log("Message sent: " + response.message);
-   }
+// send confirmation mail to user ...
+  smtpTransport.sendMail({  // email options
+    from: "improwised Technologies Pvt. Ltd.", // sender address.  Must be the same as authenticated user if using GMail.
+    to: email, // receiver
+    subject: "Confirmation email from improwised technologies private limited", // subject
+    html: `Hello,<br> Please Click on the link to verify your email.<br><a href=, ${link}, >Click here to verify</a>`,
+  // text: "nothing to say..." // body
+  }, (error, response) => {  // callback
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(`Message sent: , ${response.message}`);
+    }
 
-   smtpTransport.close(); // shut down the connection pool, no more messages.  Comment this line out to continue sending emails.
-});
+    smtpTransport.close(); // shut down the connection pool, no more messages.  Comment this line out to continue sending emails.
+  });
 
   let photo = ''; /*= req.file.filename;*/
   if (req.file) {
@@ -106,28 +106,22 @@ router.post('/register', upload.single('file'), (req, res, next) => {
   }
 });
 
-//api to check whether mail is verified or not ...
-router.get('/verify',function(req,res){
-host=req.get('host');
-console.log(req.protocol+":/"+req.get('host'));
-if((req.protocol+"://"+req.get('host'))==("http://"+host))
-{
+// api to check whether mail is verified or not ...
+router.get('/verify', (req, res) => {
+  const host = req.get('host');
+  console.log(`req.protocol, :/, req.get('host')`);
+  if (`${req.protocol}, ://, ${host}` === `http://, ${host}`) {
     console.log("Domain is matched. Information is from Authentic email");
-    if(req.query.id==rand)
-    {
-        console.log("email is verified");
-        res.render('index');
+    if (req.query.id === rand) {
+      console.log("email is verified");
+      res.render('index');
+    } else {
+      console.log("email is not verified");
+      res.end("<h1>Bad Request</h1>");
     }
-    else
-    {
-        console.log("email is not verified");
-        res.end("<h1>Bad Request</h1>");
-    }
-}
-else
-{
+  } else {
     res.end("<h1>Request is from unknown source");
-}
+  }
 });
 
 // here user will login and check is they registered
