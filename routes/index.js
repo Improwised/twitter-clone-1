@@ -1,5 +1,5 @@
 const express = require('express');
-
+const nodemailer = require('nodemailer');
 const DB = require('../helpers/db');
 
 const router = express.Router();
@@ -31,16 +31,47 @@ router.get('/', (req, res, next) => {
 
 // get user registered
 
+const smtpTransport = nodemailer.createTransport({
+  service: 'Gmail',  // sets automatically host, port and connection security settings
+  auth: {
+    user: 'jatin@improwised.com',
+    pass: 'parmar.7744',
+  },
+});
+const rand = Math.floor((Math.random() * 100) + 54);
 router.post('/register', upload.single('file'), (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const email = req.body.email;
+
+
+  const host = req.get('host');
+  const link = `http://, ${host}, /verify?id=, ${rand}`;
+
+// send confirmation mail to user ...
+  smtpTransport.sendMail({  // email options
+    from: "improwised Technologies Pvt. Ltd.", // sender address.  Must be the same as authenticated user if using GMail.
+    to: email, // receiver
+    subject: "Confirmation email from improwised technologies private limited", // subject
+    html: `Hello,<br> Please Click on the link to verify your email.<br><a href=, ${link}, >Click here to verify</a>`,
+  // text: "nothing to say..." // body
+  }, (error, response) => {  // callback
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(`Message sent: , ${response.message}`);
+    }
+
+    smtpTransport.close(); // shut down the connection pool, no more messages.  Comment this line out to continue sending emails.
+  });
+
   let photo = ''; /*= req.file.filename;*/
   if (req.file) {
     photo = req.file.filename;
   } else {
     photo = 'images.png';
   }
-  const username = req.body.username;
-  const password = req.body.password;
-  const email = req.body.email;
+
 
   req.checkBody('username', 'Username is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
@@ -72,6 +103,24 @@ router.post('/register', upload.single('file'), (req, res, next) => {
 
       res.render('index');
     });
+  }
+});
+
+// api to check whether mail is verified or not ...
+router.get('/verify', (req, res) => {
+  const host = req.get('host');
+  console.log(`req.protocol, :/, req.get('host')`);
+  if (`${req.protocol}, ://, ${host}` === `http://, ${host}`) {
+    console.log("Domain is matched. Information is from Authentic email");
+    if (req.query.id === rand) {
+      console.log("email is verified");
+      res.render('index');
+    } else {
+      console.log("email is not verified");
+      res.end("<h1>Bad Request</h1>");
+    }
+  } else {
+    res.end("<h1>Request is from unknown source");
   }
 });
 
